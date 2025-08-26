@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khóa luận: Tỷ lệ mắc ĐTĐTK tại BVĐK Vùng Tây Nguyên - Nguyễn Lê Hoàng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Variables for Theming --- */
+        :root {
+            --primary-color-light: #0056b3;
+            --secondary-color-light: #007bff;
+            --background-color-light: #f4f7f9;
+            --card-background-light: #ffffff;
+            --text-color-light: #333;
+            --heading-color-light: #002b5c;
+            --subtle-border-light: #e0e0e0;
+            --glass-bg-light: rgba(255, 255, 255, 0.6);
+            --glass-border-light: rgba(255, 255, 255, 0.4);
+
+            --primary-color-dark: #4dabf7;
+            --secondary-color-dark: #69b3f8;
+            --background-color-dark: #121212;
+            --card-background-dark: #1e1e1e;
+            --text-color-dark: #e0e0e0;
+            --heading-color-dark: #ffffff;
+            --subtle-border-dark: #333;
+            --glass-bg-dark: rgba(30, 30, 30, 0.5);
+            --glass-border-dark: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- General Styles --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* --- Light Mode --- */
+        body.light-mode {
+            --primary-color: var(--primary-color-light);
+            --secondary-color: var(--secondary-color-light);
+            --background-color: var(--background-color-light);
+            --card-background: var(--card-background-light);
+            --text-color: var(--text-color-light);
+            --heading-color: var(--heading-color-light);
+            --subtle-border: var(--subtle-border-light);
+            --glass-bg: var(--glass-bg-light);
+            --glass-border: var(--glass-border-light);
+        }
+
+        /* --- Dark Mode --- */
+        body.dark-mode {
+            --primary-color: var(--primary-color-dark);
+            --secondary-color: var(--secondary-color-dark);
+            --background-color: var(--background-color-dark);
+            --card-background: var(--card-background-dark);
+            --text-color: var(--text-color-dark);
+            --heading-color: var(--heading-color-dark);
+            --subtle-border: var(--subtle-border-dark);
+            --glass-bg: var(--glass-bg-dark);
+            --glass-border: var(--glass-border-dark);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: transparent;
+        }
+
+        .navbar.scrolled {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+        
+        .navbar.scrolled .nav-brand { color: var(--heading-color); }
+        .navbar:not(.scrolled) .nav-brand { color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .dark-mode .navbar:not(.scrolled) .nav-brand { color: #fff; }
+
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .navbar.scrolled .nav-links a { color: var(--text-color); }
+        .navbar:not(.scrolled) .nav-links a { color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .dark-mode .navbar:not(.scrolled) .nav-links a { color: #fff; }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .theme-switcher {
+            background: none;
+            border: 2px solid #fff;
+            color: #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled .theme-switcher {
+            border-color: var(--subtle-border);
+            color: var(--text-color);
+        }
+
+        .theme-switcher:hover {
+            transform: rotate(15deg) scale(1.1);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+        
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax Effect */
+            z-index: -1;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 43, 92, 0.7);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 1rem;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin: 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin: 1rem 0 2rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-color-dark);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            background-color: var(--secondary-color-dark);
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: #fff;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        /* --- Section Styling --- */
+        .section {
+            padding: 6rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--heading-color);
+        }
+
+        .section-title span {
+            color: var(--primary-color);
+        }
+
+        /* --- Shared Grid Layout --- */
+        .grid-2-col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .grid-text-content h3 {
+            font-size: 1.8rem;
+            color: var(--heading-color);
+            margin-top: 0;
+        }
+
+        /* --- Glassmorphism Card Style --- */
+        .glass-card {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px); /* For Safari */
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+        }
+        
+        .dark-mode .glass-card {
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+        }
+
+        /* --- Intro Section --- */
+        .stats-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            border-left: 5px solid var(--primary-color);
+            padding: 1rem; /* Adjusted padding */
+        }
+        
+        .stat-card .number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-card .label {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-top: 0.5rem;
+        }
+
+        /* --- Pathophysiology Section --- */
+        .patho-image {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .patho-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .patho-image figcaption {
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* --- Overview Section --- */
+        #overview {
+            background-color: var(--card-background);
+        }
+        
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--subtle-border);
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-color);
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .tab-button.active {
+            color: var(--primary-color);
+        }
+        
+        .tab-button.active::after {
+            transform: scaleX(1);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .info-card {
+            background-color: var(--background-color);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--subtle-border);
+        }
+        
+        .info-card h4 {
+            color: var(--heading-color);
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+        
+        .info-card ul {
+            list-style-type: '✓ ';
+            padding-left: 1.2rem;
+        }
+        
+        .info-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Management Section --- */
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .management-card {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .management-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .management-card h4 {
+            color: var(--heading-color);
+            font-size: 1.3rem;
+            margin: 0 0 0.5rem 0;
+        }
+
+        /* --- Methodology Section --- */
+        .methodology-parallax {
+            padding: 8rem 0;
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax Effect */
+            color: #fff;
+        }
+        
+        .methodology-parallax::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 46, 0.8);
+        }
+        
+        .methodology-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .methodology-content .section-title {
+            color: #fff;
+        }
+        
+        .method-steps {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .step-card {
+            padding: 2rem;
+            width: 250px;
+            text-align: center;
+            /* Inherits glass-card styles */
+        }
+        
+        .step-card .icon {
+            font-size: 3rem;
+            color: var(--primary-color-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .step-card h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+        .step-card p {
+            color: #eee;
+        }
+
+        /* --- Author Section --- */
+        .author-card {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem;
+            text-align: center;
+        }
+        
+        .author-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .author-card h3 {
+            color: var(--heading-color);
+            margin: 0;
+        }
+        
+        .author-card .major {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin: 0.5rem 0;
+        }
+
+        /* --- Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .modal-content h3 {
+            color: var(--heading-color);
+            margin-top: 0;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--heading-color-light);
+            color: #fff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .dark-mode .footer {
+            background-color: #1e1e1e;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none; /* Simple hiding for demo, can be replaced with a hamburger menu */
+            }
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+    </style>
+</head>
+<body class="light-mode">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-brand">N. L. HOÀNG</a>
+            <ul class="nav-links">
+                <li><a href="#intro">Đặt Vấn Đề</a></li>
+                <li><a href="#pathophysiology">Cơ Chế</a></li>
+                <li><a href="#overview">Tổng Quan</a></li>
+                <li><a href="#management">Quản Lý</a></li>
+                <li><a href="#methodology">Phương Pháp</a></li>
+                <li><a href="#author">Tác Giả</a></li>
+            </ul>
+            <button class="theme-switcher" id="theme-switcher" aria-label="Chuyển đổi giao diện">🌙</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div id="particles-js"></div>
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1>TỈ LỆ MẮC BỆNH ĐÁI THÁO ĐƯỜNG THAI KÌ TẠI BỆNH VIỆN ĐA KHOA VÙNG TÂY NGUYÊN</h1>
+            <p>Khóa luận tốt nghiệp Cử nhân Kỹ thuật Xét nghiệm Y học</p>
+            <a href="#intro" class="cta-button">Khám Phá Nghiên Cứu</a>
+        </div>
+        <div class="scroll-down">›</div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Section: Đặt Vấn Đề -->
+        <section id="intro" class="section">
+            <div class="container">
+                <h2 class="section-title"><span>01.</span> Đặt Vấn Đề</h2>
+                <div class="grid-2-col">
+                    <div class="grid-text-content">
+                        <h3>Nghiên cứu tiên phong tại Đắk Lắk</h3>
+                        <p>Đái tháo đường thai kỳ (ĐTĐTK) là tình trạng rối loạn dung nạp glucose, khởi phát hoặc được phát hiện lần đầu tiên trong lúc mang thai. Tình trạng này đang có xu hướng gia tăng nhanh chóng tại Việt Nam và trên thế giới, gây ra nhiều hậu quả nghiêm trọng cho cả mẹ và bé.</p>
+                        <p>Với mong muốn cung cấp dữ liệu khoa học quan trọng cho việc xây dựng các chương trình phòng ngừa và quản lý bệnh tại địa phương, đề tài <strong>“Tỷ lệ mắc bệnh đái tháo đường thai kỳ tại Bệnh viện Đa khoa vùng Tây Nguyên”</strong> được thực hiện. Đây là một trong những nghiên cứu đầu tiên và cần thiết tại Buôn Ma Thuột, Đắk Lắk.</p>
+                    </div>
+                    <div class="stats-cards">
+                        <div class="stat-card glass-card">
+                            <div class="number">~1/6</div>
+                            <div class="label">Thai phụ trên toàn cầu bị ảnh hưởng bởi tăng đường huyết thai kỳ.</div>
+                        </div>
+                        <div class="stat-card glass-card">
+                            <div class="number">21.8%</div>
+                            <div class="label">Tỷ lệ mắc ĐTĐTK ước tính tại Việt Nam (IDF 2021), một con số đáng báo động.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Pathophysiology -->
+        <section id="pathophysiology" class="section">
+            <div class="container">
+                <h2 class="section-title"><span>02.</span> Cơ Chế Bệnh Sinh</h2>
+                <div class="grid-2-col">
+                    <div class="grid-text-content">
+                        <h3>Kháng Insulin: Nguyên Nhân Cốt Lõi</h3>
+                        <p>Trong thai kỳ, nhau thai sản xuất ra các hormone như estrogen, cortisol và đặc biệt là human placental lactogen (hPL). Các hormone này có tác dụng đối kháng insulin, làm cho các tế bào của cơ thể mẹ phản ứng kém hiệu quả hơn với insulin.</p>
+                        <p>Đây là một hiện tượng sinh lý bình thường nhằm đảm bảo cung cấp đủ glucose cho thai nhi phát triển. Tuy nhiên, ở một số phụ nữ, tuyến tụy không thể sản xuất đủ insulin để bù đắp cho tình trạng kháng insulin này, dẫn đến lượng đường trong máu tăng cao và gây ra ĐTĐTK.</p>
+                    </div>
+                    <figure class="patho-image glass-card">
+                        <img src="https://placehold.co/600x400/e8f7ff/0056b3?text=Sơ+đồ+minh+họa+kháng+insulin" alt="Sơ đồ cơ chế bệnh sinh ĐTĐTK">
+                        <figcaption>Glucose từ mẹ qua nhau thai đến thai nhi. Khi mẹ bị ĐTĐTK, lượng glucose dư thừa sẽ khiến tuyến tụy của thai nhi phải làm việc quá sức.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Tổng Quan -->
+        <section id="overview" class="section">
+            <div class="container">
+                <h2 class="section-title"><span>03.</span> Tổng Quan Y Văn</h2>
+                <div class="tabs-container">
+                    <button class="tab-button active" data-tab="tab1">Yếu Tố Nguy Cơ</button>
+                    <button class="tab-button" data-tab="tab2">Hậu Quả</button>
+                    <button class="tab-button" data-tab="tab3">Tầm Soát & Chẩn Đoán</button>
+                </div>
+
+                <div id="tab1" class="tab-content active">
+                    <div class="overview-grid">
+                        <div class="info-card">
+                            <h4>Yếu tố chính</h4>
+                            <ul>
+                                <li><strong>Tuổi mẹ:</strong> Nguy cơ tăng cao ở phụ nữ trên 25 tuổi, đặc biệt là trên 35.</li>
+                                <li><strong>Thừa cân, béo phì:</strong> Chỉ số BMI trước thai kỳ cao là yếu tố nguy cơ mạnh mẽ.</li>
+                                <li><strong>Tiền sử gia đình:</strong> Có người thân (bố, mẹ, anh chị em) mắc đái tháo đường.</li>
+                                <li><strong>Tiền sử bản thân:</strong> Từng bị ĐTĐTK ở lần mang thai trước.</li>
+                            </ul>
+                        </div>
+                         <div class="info-card">
+                            <h4>Yếu tố khác</h4>
+                            <ul>
+                                <li>Hội chứng buồng trứng đa nang (PCOS).</li>
+                                <li>Tiền sử sinh con to (>4000 gram).</li>
+                                <li>Chủng tộc (người châu Á có nguy cơ cao hơn).</li>
+                                <li>Lối sống ít vận động.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="tab2" class="tab-content">
+                     <div class="overview-grid">
+                        <div class="info-card">
+                            <h4>Đối với Mẹ</h4>
+                            <ul>
+                                <li>Tăng nguy cơ tiền sản giật, cao huyết áp.</li>
+                                <li>Tăng tỷ lệ phải sinh mổ.</li>
+                                <li>Nguy cơ phát triển đái tháo đường tuýp 2 cao gấp 7-10 lần trong tương lai.</li>
+                                <li>Tăng nguy cơ mắc bệnh tim mạch.</li>
+                            </ul>
+                        </div>
+                         <div class="info-card">
+                            <h4>Đối với Con</h4>
+                            <ul>
+                                <li>Thai to, gây khó khăn và chấn thương khi sinh.</li>
+                                <li>Hạ đường huyết, suy hô hấp ngay sau sinh.</li>
+                                <li>Tăng nguy cơ béo phì và mắc đái tháo đường tuýp 2 khi trưởng thành.</li>
+                                <li>Vàng da sơ sinh.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab3" class="tab-content">
+                    <div class="overview-grid">
+                        <div class="info-card">
+                            <h4>Thời Điểm Vàng</h4>
+                            <p>Việc tầm soát ĐTĐTK được khuyến cáo thực hiện cho tất cả thai phụ vào tuần thứ <strong>24 đến 28</strong> của thai kỳ.</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>Tiêu Chuẩn Chẩn Đoán (WHO)</h4>
+                            <p>Chẩn đoán xác định khi có ít nhất 1 trong 3 chỉ số sau vượt ngưỡng (sau khi thực hiện OGTT 75g):</p>
+                            <ul>
+                                <li>Lúc đói: <strong>≥ 5,1 mmol/L</strong></li>
+                                <li>Sau 1 giờ: <strong>≥ 10,0 mmol/L</strong></li>
+                                <li>Sau 2 giờ: <strong>≥ 8,5 mmol/L</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Management -->
+        <section id="management" class="section">
+            <div class="container">
+                <h2 class="section-title"><span>04.</span> Quản Lý & Điều Trị</h2>
+                <div class="management-grid">
+                    <div class="management-card glass-card">
+                        <div class="icon">🥗</div>
+                        <h4>Dinh Dưỡng</h4>
+                        <p>Xây dựng chế độ ăn lành mạnh, cân bằng, chia nhỏ bữa ăn để ổn định đường huyết.</p>
+                    </div>
+                    <div class="management-card glass-card">
+                        <div class="icon">🏃‍♀️</div>
+                        <h4>Vận Động</h4>
+                        <p>Tập thể dục cường độ vừa phải, đều đặn ít nhất 30 phút mỗi ngày, hầu hết các ngày trong tuần.</p>
+                    </div>
+                    <div class="management-card glass-card">
+                        <div class="icon">🩸</div>
+                        <h4>Theo Dõi</h4>
+                        <p>Tự theo dõi đường huyết tại nhà theo chỉ định của bác sĩ để điều chỉnh lối sống và điều trị kịp thời.</p>
+                    </div>
+                    <div class="management-card glass-card">
+                        <div class="icon">💉</div>
+                        <h4>Điều Trị</h4>
+                        <p>Nếu thay đổi lối sống không đủ hiệu quả, bác sĩ có thể chỉ định dùng thuốc, phổ biến nhất là tiêm insulin.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section: Methodology -->
+        <section id="methodology" class="methodology-parallax">
+            <div class="methodology-content container">
+                <h2 class="section-title"><span>05.</span> Phương Pháp Nghiên Cứu</h2>
+                <div class="method-steps">
+                    <div class="step-card glass-card">
+                        <div class="icon">🔬</div>
+                        <h4>Thiết Kế</h4>
+                        <p>Nghiên cứu mô tả cắt ngang.</p>
+                    </div>
+                    <div class="step-card glass-card">
+                        <div class="icon">👥</div>
+                        <h4>Cỡ Mẫu</h4>
+                        <p>Dự kiến <strong>240</strong> thai phụ đáp ứng tiêu chí.</p>
+                    </div>
+                    <div class="step-card glass-card">
+                        <div class="icon">🏥</div>
+                        <h4>Địa Điểm</h4>
+                        <p>Bệnh viện Đa khoa Vùng Tây Nguyên.</p>
+                    </div>
+                     <div class="step-card glass-card">
+                        <div class="icon">📊</div>
+                        <h4>Xử Lý Số Liệu</h4>
+                        <p>Sử dụng phần mềm SPSS 20.0.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Author -->
+        <section id="author" class="section">
+            <div class="container">
+                 <h2 class="section-title"><span>06.</span> Tác Giả & Hướng Dẫn</h2>
+                 <div class="author-card glass-card">
+                    <img src="hoangsine.jpg" alt="Ảnh đại diện Nguyễn Lê Hoàng" onerror="this.onerror=null;this.src='hoangsine.jpg';">
+                    <h3>Nguyễn Lê Hoàng</h3>
+                    <p class="major">Sinh viên - Kỹ thuật Xét nghiệm Y học</p>
+                    <p>Trường Đại học Tây Nguyên</p>
+                    <button class="cta-button" id="show-thanks-modal" style="margin-top: 1.5rem;">Xem Lời Cảm Ơn</button>
+                    <hr style="border: 1px solid var(--subtle-border); margin: 2rem 0;">
+                    <p><strong>Người hướng dẫn khoa học:</strong></p>
+                    <h4>Th.S Lê Thị Xuân Quyên</h4>
+                 </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Nguyễn Lê Hoàng - Khoa Y Dược, Trường Đại học Tây Nguyên.</p>
+        </div>
+    </footer>
+
+    <!-- Modal for "Lời Cảm Ơn" -->
+    <div class="modal-overlay" id="thanks-modal">
+        <div class="modal-content glass-card">
+            <button class="modal-close" id="close-thanks-modal">&times;</button>
+            <h3>Lời Cảm Ơn</h3>
+            <p>Trước hết, em xin gửi lời cảm ơn chân thành đến các thầy cô giáo trong Bộ môn Xét nghiệm, Khoa Y Dược, Trường Đại học Tây Nguyên đã tận tình hướng dẫn và hỗ trợ em trong suốt quá trình thực hiện khóa luận này. Đặc biệt, em xin bày tỏ lòng biết ơn sâu sắc đến cô Th.S Lê Thị Xuân Quyên - người đã trực tiếp hướng dẫn và giúp đỡ em vượt qua những khó khăn, thử thách trong quá trình nghiên cứu.</p>
+            <p>Em cũng xin gửi lời cảm ơn đến Bệnh viện Đa khoa vùng Tây Nguyên đã luôn đồng hành, chia sẻ và hỗ trợ em trong suốt thời gian qua. Sự giúp đỡ và hỗ trợ của trung tâm là nguồn động lực lớn lao giúp em hoàn thành tốt khóa luận này.</p>
+            <p>Cuối cùng, em xin gửi lời cảm ơn đến gia đình và bạn bè đã luôn bên cạnh, động viên và ủng hộ em trong suốt quá trình học tập và nghiên cứu. Sự quan tâm và yêu thương của mọi người là nguồn động lực vô cùng quý báu giúp em vượt qua mọi khó khăn.</p>
+        </div>
+    </div>
+
+    <!-- Particles.js Script -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // --- Particles.js config ---
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": "#ffffff" },
+                    "shape": { "type": "circle" },
+                    "opacity": { "value": 0.5, "random": false },
+                    "size": { "value": 3, "random": true },
+                    "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
+                    "move": { "enable": true, "speed": 2, "direction": "none", "out_mode": "out" }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                    "modes": { "repulse": { "distance": 100 }, "push": { "particles_nb": 4 } }
+                },
+                "retina_detect": true
+            });
+        }
+
+        // --- Theme Switcher ---
+        const themeSwitcher = document.getElementById('theme-switcher');
+        const body = document.body;
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme === 'dark') {
+            body.classList.replace('light-mode', 'dark-mode');
+            themeSwitcher.textContent = '☀️';
+        }
+
+        themeSwitcher.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                body.classList.replace('light-mode', 'dark-mode');
+                themeSwitcher.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.replace('dark-mode', 'light-mode');
+                themeSwitcher.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // --- Navbar Scroll Effect ---
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // --- Tabs Functionality ---
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === button.dataset.tab) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // --- Fade-in on Scroll ---
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Modal Functionality ---
+        const modal = document.getElementById('thanks-modal');
+        const openModalBtn = document.getElementById('show-thanks-modal');
+        const closeModalBtn = document.getElementById('close-thanks-modal');
+
+        openModalBtn.addEventListener('click', () => modal.classList.add('active'));
+        closeModalBtn.addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    });
+    </script>
+</body>
+</html>
